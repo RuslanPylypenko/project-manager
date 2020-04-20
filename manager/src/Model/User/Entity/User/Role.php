@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Tests\Unit\Model\User\Entity\User;
+namespace App\Model\User\Entity\User;
 
 
 use Webmozart\Assert\Assert;
