@@ -2,6 +2,7 @@
 
 namespace App\Model\User\Entity\User;
 
+use App\Tests\Unit\Model\User\Entity\User\Role;
 use Doctrine\Common\Collections\ArrayCollection;
 use Webmozart\Assert\Assert;
 
@@ -41,6 +42,12 @@ class User
      * @var string
      */
     private $status;
+
+    /**
+     * @var Role
+     */
+    private $role;
+
     /**
      * @var Network[]|ArrayCollection
      */
@@ -50,6 +57,7 @@ class User
     {
         $this->id = $id;
         $this->date = $date;
+        $this->role = Role::user();
         $this->networks = new ArrayCollection();
     }
 
@@ -109,6 +117,16 @@ class User
         $this->status = self::STATUS_ACTIVE;
         $this->confirmToken = null;
     }
+
+    public function changeRole(Role $role): void
+    {
+        if ($this->role->isEqual($role)) {
+            throw new \DomainException('Role is already same.');
+        }
+
+        $this->role = $role;
+    }
+
 
     public function isWait(): bool
     {
@@ -187,6 +205,14 @@ class User
 
         $this->passwordHash = $passwordHash;
         $this->resetToken = null;
+    }
+
+    /**
+     * @return Role
+     */
+    public function getRole(): Role
+    {
+        return $this->role;
     }
 
 
