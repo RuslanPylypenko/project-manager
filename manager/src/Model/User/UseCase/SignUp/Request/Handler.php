@@ -10,8 +10,6 @@ use App\Model\User\Entity\User\UserRepository;
 use App\Model\User\Service\SignUpConfirmTokenizer;
 use App\Model\User\Service\ConfirmTokenSender;
 use App\Model\User\Service\PasswordHasher;
-use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
 
 class Handler
 {
@@ -62,7 +60,10 @@ class Handler
 
         $user = new User(
             Id::next(),
-            new \DateTimeImmutable(),
+            new \DateTimeImmutable()
+        );
+
+        $user->signUpByEmail(
             $email,
             $this->hasher->hash($command->password),
             $token = $this->tokenizer->generate()

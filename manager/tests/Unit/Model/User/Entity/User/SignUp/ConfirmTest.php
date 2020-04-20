@@ -23,16 +23,30 @@ class ConfirmTest extends TestCase
         self::assertNull($user->getConfirmToken());
     }
 
+    public function testAlready(): void
+    {
+        $user = $this->buildSignedUpUser();
+
+        $user->confirmSignUp();
+        $this->expectExceptionMessage('User is already confirmed.');
+        $user->confirmSignUp();
+    }
+
 
     private function buildSignedUpUser(): User
     {
-        return new User(
+        $user = new User(
             Id::next(),
-            new \DateTimeImmutable(),
+            new \DateTimeImmutable()
+        );
+
+        $user->signUpByEmail(
             new Email('test@app.test'),
             'hash',
             $token = 'token'
         );
+
+        return $user;
     }
 
 }
