@@ -3,6 +3,7 @@
 namespace App\Model\User\Entity\User;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Webmozart\Assert\Assert;
 
 class User
 {
@@ -172,6 +173,20 @@ class User
     public function getResetToken(): ?ResetToken
     {
         return $this->resetToken;
+    }
+
+    public function passwordReset(\DateTimeImmutable $date, string $passwordHash): void
+    {
+        if (!$this->resetToken) {
+            throw new \DomainException('Resetting is not requested.');
+        }
+
+        if ($this->resetToken->isExpiredTo($date)) {
+            throw new \DomainException('Reset token is expired.');
+        }
+
+        $this->passwordHash = $passwordHash;
+        $this->resetToken = null;
     }
 
 
