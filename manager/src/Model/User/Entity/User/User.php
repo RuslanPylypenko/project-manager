@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="user_users", uniqueConstraints={
  *          @ORM\UniqueConstraint(columns={"email"}),
- *          @ORM\UniqueConstraint(columns={"reset_password_token"})
+ *          @ORM\UniqueConstraint(columns={"reset_token_token"})
  *     })
  */
 class User
