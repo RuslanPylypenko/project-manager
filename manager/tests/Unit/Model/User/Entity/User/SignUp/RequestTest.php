@@ -2,8 +2,9 @@
 
 namespace App\Tests\Unit\Model\User\Entity\User\SignUp;
 
+use App\Model\User\Entity\User\Email;
+use App\Model\User\Entity\User\Id;
 use App\Model\User\Entity\User\User;
-use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\TwigBundle\Tests\TestCase;
 
 class RequestTest extends TestCase
@@ -11,9 +12,9 @@ class RequestTest extends TestCase
     public function testSuccess(): void
     {
         $user = new User(
-            $id = Uuid::uuid4()->toString(),
+            $id = Id::next(),
             $date = new \DateTimeImmutable(),
-            $email = 'test@app.test',
+            $email = new Email('test@app.test'),
             $hash = 'hash'
         );
 

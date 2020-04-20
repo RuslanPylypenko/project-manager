@@ -6,11 +6,11 @@ class User
 {
 
     /**
-     * @var string
+     * @var Id
      */
     private $email;
     /**
-     * @var string
+     * @var Email
      */
     private $passwordHash;
     /**
@@ -22,7 +22,7 @@ class User
      */
     private $date;
 
-    public function __construct(string $id, \DateTimeImmutable $date, string $email, string $passwordHash)
+    public function __construct(Id $id, \DateTimeImmutable $date, Email $email, string $passwordHash)
     {
         $this->email = $email;
         $this->passwordHash = $passwordHash;
@@ -30,7 +30,7 @@ class User
         $this->date = $date;
     }
 
-    public function getEmail(): string
+    public function getEmail(): Email
     {
         return $this->email;
     }
@@ -43,7 +43,7 @@ class User
     /**
      * @return string
      */
-    public function getId(): string
+    public function getId(): Id
     {
         return $this->id;
     }
