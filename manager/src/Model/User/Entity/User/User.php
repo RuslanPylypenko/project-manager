@@ -17,12 +17,17 @@ class User
      * @var string
      */
     private $id;
+    /**
+     * @var \DateTimeImmutable
+     */
+    private $date;
 
-    public function __construct(string $id, string $email, string $passwordHash)
+    public function __construct(string $id, \DateTimeImmutable $date, string $email, string $passwordHash)
     {
         $this->email = $email;
         $this->passwordHash = $passwordHash;
         $this->id = $id;
+        $this->date = $date;
     }
 
     public function getEmail(): string
@@ -41,5 +46,13 @@ class User
     public function getId(): string
     {
         return $this->id;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getDate(): \DateTimeImmutable
+    {
+        return $this->date;
     }
 }
