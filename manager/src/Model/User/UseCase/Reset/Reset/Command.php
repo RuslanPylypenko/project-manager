@@ -10,17 +10,17 @@ class Command {
      * @var string
      * @Assert\NotBlank()
      */
-    public $passwordHash;
+    public $token;
 
     /**
      * @var string
      * @Assert\Length(min=6)
      */
-    public $resetToken;
+    public $password;
 
-    public function __construct(string $resetToken)
+    public function __construct(string $token)
     {
 
-        $this->resetToken = $resetToken;
+        $this->token = $token;
     }
 }

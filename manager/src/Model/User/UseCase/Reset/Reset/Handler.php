@@ -32,13 +32,14 @@ class Handler
 
     public function handle(Command $command): void
     {
-        if ($user = $this->users->findByResetToken($command->resetToken)) {
+        if (!$user = $this->users->findByResetToken($command->token)) {
             throw new \DomainException('Incorrect reset token.');
         }
 
-        $now = new \DateTimeImmutable();
-
-        $user->passwordReset($now, $command->passwordHash);
+        $user->passwordReset(
+            new \DateTimeImmutable(),
+            $this->hasher->hash($command->password)
+        );
 
         $this->flusher->flush();
 

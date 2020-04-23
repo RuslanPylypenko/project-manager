@@ -214,7 +214,7 @@ class User
         return $this->resetToken;
     }
 
-    public function passwordReset(\DateTimeImmutable $date, string $passwordHash): void
+    public function passwordReset(\DateTimeImmutable $date, string $hash): void
     {
         if (!$this->resetToken) {
             throw new \DomainException('Resetting is not requested.');
@@ -224,7 +224,7 @@ class User
             throw new \DomainException('Reset token is expired.');
         }
 
-        $this->passwordHash = $passwordHash;
+        $this->passwordHash = $hash;
         $this->resetToken = null;
     }
 
