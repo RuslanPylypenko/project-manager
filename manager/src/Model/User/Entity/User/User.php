@@ -21,7 +21,6 @@ class User
     private const STATUS_ACTIVE = 'active';
 
     /**
-     * @var Id
      * @ORM\Column(type="user_user_id")
      * @ORM\Id
      */
