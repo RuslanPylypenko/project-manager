@@ -53,4 +53,20 @@ class SignUpController extends AbstractController
 
     }
 
+    public function confirm(string $token, SignUp\Confirm\Handler $handler): Response
+    {
+        $command = new SignUp\Confirm\Command($token);
+
+        try {
+            $handler->handle($command);
+            $this->addFlash('success', 'Email is successfully confirmed.');
+            return $this->redirectToRoute('home');
+        } catch (\DomainException $e) {
+            $this->logger->error($e->getMessage(), ['exception' => $e]);
+            $this->addFlash('error', $e->getMessage());
+            return $this->redirectToRoute('home');
+        }
+    }
+
+
 }
