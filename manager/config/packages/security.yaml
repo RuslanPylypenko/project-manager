@@ -13,7 +13,7 @@ security:
             security: false
         main:
             anonymous: true
-            provider: app_user_provider
+            user_checker: App\Security\UserChecker
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator\
