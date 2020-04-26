@@ -7,7 +7,7 @@ namespace App\Model\User\UseCase\Role;
 use App\Model\Flusher;
 use App\Model\User\Entity\User\Id;
 use App\Model\User\Entity\User\UserRepository;
-use App\Tests\Unit\Model\User\Entity\User\Role;
+use App\Model\User\Entity\User\Role;
 
 class Handler
 {
