@@ -8,7 +8,7 @@ use App\Model\User\Entity\User\Id;
 use App\Model\User\Entity\User\User;
 use App\Model\User\Entity\User\UserRepository;
 use App\Model\User\Service\SignUpConfirmTokenizer;
-use App\Model\User\Service\ConfirmTokenSender;
+use App\Model\User\Service\SignUpConfirmTokenSender;
 use App\Model\User\Service\PasswordHasher;
 
 class Handler
@@ -27,7 +27,7 @@ class Handler
      */
     private $tokenizer;
     /**
-     * @var ConfirmTokenSender
+     * @var SignUpConfirmTokenSender
      */
     private $sender;
     /**
@@ -39,7 +39,7 @@ class Handler
         UserRepository $users,
         PasswordHasher $hasher,
         SignUpConfirmTokenizer $tokenizer,
-        ConfirmTokenSender $sender,
+        SignUpConfirmTokenSender $sender,
         Flusher $flusher
     )
     {
