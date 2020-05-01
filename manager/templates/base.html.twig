@@ -15,12 +15,8 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="{{ path('home') }}">
-        <svg class="c-sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-            <use xlink:href="assets/brand/coreui-pro.svg#full"></use>
-        </svg>
-        <svg class="c-sidebar-brand-minimized" width="46" height="46" alt="CoreUI Logo">
-            <use xlink:href="assets/brand/coreui-pro.svg#signet"></use>
-        </svg>
+        <img class="navbar-brand-full" src="https://coreui.io/demo/img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
+        <img class="navbar-brand-minimized" src="https://coreui.io/demo/img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
     </a>
     <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
         <span class="navbar-toggler-icon"></span>
@@ -47,6 +43,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('home') }}">
                         <i class="nav-icon icon-speedometer"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('profile') }}">
+                        <i class="nav-icon icon-user"></i> Profile
                     </a>
                 </li>
             </ul>
