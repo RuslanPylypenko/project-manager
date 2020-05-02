@@ -7,7 +7,11 @@ namespace App\Controller;
 use App\ReadModel\User\UserFetcher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/users")
+ */
 class UsersController extends AbstractController
 {
     private $users;
