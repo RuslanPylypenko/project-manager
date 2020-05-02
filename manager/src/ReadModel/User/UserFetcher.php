@@ -5,6 +5,8 @@ namespace App\ReadModel\User;
 use App\ReadModel\User\Filter\Filter;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 class UserFetcher
 {
@@ -12,10 +14,15 @@ class UserFetcher
      * @var Connection
      */
     private $connection;
+    /**
+     * @var PaginationInterface
+     */
+    private $paginator;
 
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, PaginatorInterface $paginator)
     {
         $this->connection = $connection;
+        $this->paginator = $paginator;
     }
 
     public function existsByResetToken(string $token): bool
@@ -163,9 +170,11 @@ class UserFetcher
 
     /**
      * @param Filter $filter
-     * @return array
+     * @param int $page
+     * @param int $size
+     * @return PaginationInterface
      */
-    public function all(Filter $filter): array
+    public function all(Filter $filter, int $page, int $size): PaginationInterface
     {
         $qb = $this->connection->createQueryBuilder()
             ->select(
@@ -199,8 +208,6 @@ class UserFetcher
             $qb->setParameter(':role', $filter->role);
         }
 
-        $stmt = $qb->execute();
-
-        return $stmt->fetchAll(FetchMode::ASSOCIATIVE);
+        return $this->paginator->paginate($qb, $page, $size);
     }
 }
