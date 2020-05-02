@@ -320,5 +320,13 @@ class User
         }
     }
 
+    /**
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
 
 }
