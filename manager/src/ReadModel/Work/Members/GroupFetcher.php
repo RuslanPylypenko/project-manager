@@ -2,7 +2,7 @@
 
 namespace App\ReadModel\Work\Members;
 
-use Doctrine\DBAL\Driver\Connection;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\FetchMode;
 
 class GroupFetcher
@@ -12,6 +12,20 @@ class GroupFetcher
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
+    }
+
+    public function assoc(): array
+    {
+        $stmt = $this->connection->createQueryBuilder()
+            ->select(
+                'id',
+                'name'
+            )
+            ->from('work_members_groups')
+            ->orderBy('name')
+            ->execute();
+
+        return array_column($stmt->fetchAll(FetchMode::ASSOCIATIVE), 'name', 'id');
     }
 
     public function all(): array
