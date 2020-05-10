@@ -5,6 +5,7 @@
     "php": "^7.2.0",
     "ext-ctype": "*",
     "ext-iconv": "*",
+    "ext-PDO": "^7.2",
     "ramsey/uuid": "^3.8",
     "knplabs/knp-paginator-bundle": "^3.0",
     "knplabs/knp-menu-bundle": "^2.2",
