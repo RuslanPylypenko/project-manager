@@ -3,6 +3,7 @@
 
 namespace App\Controller\Work\Members;
 
+use App\Annotation\Guid;
 use App\Model\User\Entity\User\User;
 use App\Model\Work\Entity\Members\Member\Member;
 use App\Model\Work\UseCase\Members\Member\Archive;
@@ -215,7 +216,7 @@ class MembersController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name=".show")
+     * @Route("/{id}", name=".show", requirements={"id"=Guid::PATTERN})
      * @param Member $member
      * @return Response
      */
