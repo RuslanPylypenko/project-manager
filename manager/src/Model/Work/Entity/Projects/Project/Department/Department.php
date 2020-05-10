@@ -7,7 +7,7 @@ use App\Model\Work\Entity\Projects\Project\Project;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity
  * @ORM\Table(name="work_projects_project_departments")
  */
 class Department
@@ -20,8 +20,8 @@ class Department
     private $project;
     /**
      * @var Id
-     * @ORM\Column(name="work_projects_project_department_id")
-     * @ORM\Id()
+     * @ORM\Column(type="work_projects_project_department_id")
+     * @ORM\Id
      */
     private $id;
     /**
