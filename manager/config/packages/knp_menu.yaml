@@ -1,3 +1,5 @@
-App\Menu\SidebarMenu:
-  tags:
-    - { name: knp_menu.menu_builder, method: build, alias: sidebar }
+knp_menu:
+  twig:
+    template: 'override/menu.html.twig'
+  templating: false
+  default_renderer: twig
