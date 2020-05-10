@@ -45,7 +45,7 @@ class EmailController extends AbstractController
                 $this->addFlash('success', 'Check your email.');
                 return $this->redirectToRoute('profile');
             } catch (\DomainException $e) {
-                $this->logger->error($e->getMessage(), ['exception' => $e]);
+                $this->logger->warning($e->getMessage(), ['exception' => $e]);
                 $this->addFlash('error', $e->getMessage());
             }
         }
@@ -70,7 +70,7 @@ class EmailController extends AbstractController
             $this->addFlash('success', 'Email is successfully changed.');
             return $this->redirectToRoute('profile');
         } catch (\DomainException $e) {
-            $this->logger->error($e->getMessage(), ['exception' => $e]);
+            $this->logger->warning($e->getMessage(), ['exception' => $e]);
             $this->addFlash('error', $e->getMessage());
             return $this->redirectToRoute('profile');
         }
