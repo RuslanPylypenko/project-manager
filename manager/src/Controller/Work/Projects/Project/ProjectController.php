@@ -2,6 +2,7 @@
 
 namespace App\Controller\Work\Projects\Project;
 
+use App\Annotation\Guid;
 use App\Model\Work\Entity\Projects\Project\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
