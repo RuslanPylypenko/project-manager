@@ -2,10 +2,10 @@
 
 namespace App\Controller\Work\Projects;
 
+use App\Controller\ErrorHandler;
 use App\Model\Work\UseCase\Projects\Project\Create;
 use App\ReadModel\Work\Projects\Project\Filter;
 use App\ReadModel\Work\Projects\Project\ProjectFetcher;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,11 +18,11 @@ class ProjectsController extends AbstractController
 {
     private const PER_PAGE = 50;
 
-    private $logger;
+    private $errors;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(ErrorHandler $errors)
     {
-        $this->logger = $logger;
+        $this->errors = $errors;
     }
 
     /**
@@ -79,7 +79,7 @@ class ProjectsController extends AbstractController
                 $handler->handle($command);
                 return $this->redirectToRoute('work.projects');
             } catch (\DomainException $e) {
-                $this->logger->warning($e->getMessage(), ['exception' => $e]);
+                $this->errors->handle($e);
                 $this->addFlash('error', $e->getMessage());
             }
         }
