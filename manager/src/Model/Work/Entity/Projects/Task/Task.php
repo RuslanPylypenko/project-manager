@@ -46,6 +46,8 @@ class Task
      */
     private $priority;
 
+    private $planDate;
+
     public function __construct(
         Id $id,
         Project $project,
@@ -74,6 +76,11 @@ class Task
         $this->content = $content;
     }
 
+    public function plan(?\DateTimeImmutable $date): void
+    {
+        $this->planDate = $date;
+    }
+
     public function getId(): Id
     {
         return $this->id;
@@ -92,6 +99,11 @@ class Task
     public function getDate(): \DateTimeImmutable
     {
         return $this->date;
+    }
+
+    public function getPlanDate(): ?\DateTimeImmutable
+    {
+        return $this->planDate;
     }
 
     public function getName(): string
