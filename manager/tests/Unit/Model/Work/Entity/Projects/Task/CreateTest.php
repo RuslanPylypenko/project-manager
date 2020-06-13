@@ -10,7 +10,7 @@ use App\Tests\Builder\Work\Members\MemberBuilder;
 use App\Tests\Builder\Work\Projects\ProjectBuilder;
 use PHPUnit\Framework\TestCase;
 
-class CreateTask extends TestCase
+class CreateTest extends TestCase
 {
     public function testSuccess(): void
     {
@@ -39,7 +39,9 @@ class CreateTask extends TestCase
         self::assertEquals($content, $task->getContent());
         self::assertEquals(0, $task->getProgress());
 
-        self::assertNull($task->geParent());
+        self::assertNull($task->getParent());
         self::assertNull($task->getPlanDate());
+
+        self::assertTrue($task->isNew());
     }
 }
