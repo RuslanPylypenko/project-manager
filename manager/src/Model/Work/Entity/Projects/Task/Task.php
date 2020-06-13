@@ -46,6 +46,8 @@ class Task
      */
     private $priority;
 
+    private $parent;
+
     private $planDate;
 
     public function __construct(
@@ -74,6 +76,21 @@ class Task
     {
         $this->name = $name;
         $this->content = $content;
+    }
+
+    public function setChildOf(?Task $parent): void
+    {
+        if ($parent) {
+            $current = $parent;
+            do {
+                if ($current === $this) {
+                    throw new \DomainException('Cyclomatic children.');
+                }
+            }
+            while ($current && $current = $current->getParent());
+        }
+
+        $this->parent = $parent;
     }
 
     public function plan(?\DateTimeImmutable $date): void
@@ -129,5 +146,10 @@ class Task
     public function getPriority(): int
     {
         return $this->priority;
+    }
+
+    public function getParent(): ?Task
+    {
+        return $this->parent;
     }
 }

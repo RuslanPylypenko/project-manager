@@ -39,6 +39,7 @@ class CreateTask extends TestCase
         self::assertEquals($content, $task->getContent());
         self::assertEquals(0, $task->getProgress());
 
+        self::assertNull($task->geParent());
         self::assertNull($task->getPlanDate());
     }
 }
