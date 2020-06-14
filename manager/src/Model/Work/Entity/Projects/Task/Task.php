@@ -206,7 +206,7 @@ class Task
     {
         Assert::range($progress, 0, 100);
         if ($progress === $this->progress) {
-            throw new \DomainException('Progress is already same.');
+            throw new \DomainException('ProgressWidget is already same.');
         }
         $this->progress = $progress;
     }
