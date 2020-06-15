@@ -15,3 +15,8 @@
         {{ parent() }}
     {% endif %}
 {% endblock %}
+
+
+{% block compressed_root %}
+    {{ block('root')|spaceless }}
+{% endblock %}
