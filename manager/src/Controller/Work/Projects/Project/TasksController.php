@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @ParamConverter("project", options={"id" = "project_id"})
  * @Entity("task", expr="repository.findOneBy({'project': project_id, 'id': id})")
  */
-class TaskController extends AbstractController
+class TasksController extends AbstractController
 {
     private const PER_PAGE = 50;
 
@@ -53,6 +53,66 @@ class TaskController extends AbstractController
 
         $pagination = $this->tasks->all(
             $filter,
+            $request->query->getInt('page', 1),
+            self::PER_PAGE,
+            $request->query->get('sort', 't.date'),
+            $request->query->get('direction', 'desc')
+        );
+
+        return $this->render('app/work/projects/tasks/index.html.twig', [
+            'project' => $project,
+            'pagination' => $pagination,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/me", name=".me")
+     * @param Project $project
+     * @param Request $request
+     * @return Response
+     */
+    public function me(Project $project, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted(ProjectAccess::VIEW, $project);
+
+        $filter = Filter\Filter::forProject($project->getId()->getValue());
+
+        $form = $this->createForm(Filter\Form::class, $filter);
+        $form->handleRequest($request);
+
+        $pagination = $this->tasks->all(
+            $filter->forExecutor($this->getUser()->getId()),
+            $request->query->getInt('page', 1),
+            self::PER_PAGE,
+            $request->query->get('sort', 't.date'),
+            $request->query->get('direction', 'desc')
+        );
+
+        return $this->render('app/work/projects/tasks/index.html.twig', [
+            'project' => $project,
+            'pagination' => $pagination,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/own", name=".own")
+     * @param Project $project
+     * @param Request $request
+     * @return Response
+     */
+    public function own(Project $project, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted(ProjectAccess::VIEW, $project);
+
+        $filter = Filter\Filter::forProject($project->getId()->getValue());
+
+        $form = $this->createForm(Filter\Form::class, $filter);
+        $form->handleRequest($request);
+
+        $pagination = $this->tasks->all(
+            $filter->forAuthor($this->getUser()->getId()),
             $request->query->getInt('page', 1),
             self::PER_PAGE,
             $request->query->get('sort', 't.date'),
