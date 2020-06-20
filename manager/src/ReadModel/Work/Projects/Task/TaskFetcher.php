@@ -115,8 +115,9 @@ class TaskFetcher
             $qb->setParameter(':executor', $filter->executor);
         }
 
-        if (!\in_array($sort, ['t.id', 't.date', 'author_name', 'project_name', 'name', 't.type', 't.plan_date', 't.progress', 't.priority', 't.status'], true)) {
-            throw new \UnexpectedValueException('Cannot sort by ' . $sort);
+
+        if ($filter->roots) {
+            $qb->andWhere('t.parent_id IS NULL');
         }
 
         $qb->orderBy($sort ?: 't.id', $direction === 'desc' ? 'desc' : 'asc');
