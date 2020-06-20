@@ -76,7 +76,9 @@ class TasksController extends AbstractController
 
         $filter = Filter\Filter::forProject($project->getId()->getValue());
 
-        $form = $this->createForm(Filter\Form::class, $filter);
+        $form = $this->createForm(Filter\Form::class, $filter, [
+            'action' => $this->generateUrl('work.projects.project.tasks', ['project_id' => $project->getId()]),
+        ]);
         $form->handleRequest($request);
 
         $pagination = $this->tasks->all(
@@ -106,7 +108,9 @@ class TasksController extends AbstractController
 
         $filter = Filter\Filter::forProject($project->getId()->getValue());
 
-        $form = $this->createForm(Filter\Form::class, $filter);
+        $form = $this->createForm(Filter\Form::class, $filter, [
+            'action' => $this->generateUrl('work.projects.project.tasks', ['project_id' => $project->getId()]),
+        ]);
         $form->handleRequest($request);
 
         $pagination = $this->tasks->all(
